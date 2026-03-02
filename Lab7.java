@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Lab7 {
 
@@ -22,19 +23,27 @@ public class Lab7 {
 
         double[] A12 = new double[12];
         double prodNegA12 = 1;
+        boolean hasNeg = false;
         for (int i = 0; i < 12; i++) {
             A12[i] = Math.random() * 20 - 10;
-            if (A12[i] < 0) prodNegA12 *= A12[i];
+            if (A12[i] < 0) {
+                prodNegA12 *= A12[i];
+                hasNeg = true;
+            }
         }
-        System.out.println("3) " + prodNegA12);
+        System.out.println("3) " + (hasNeg ? prodNegA12 : 0));
 
         int[] C25 = new int[25];
         long prodPosC25 = 1;
+        boolean hasPos = false;
         for (int i = 0; i < 25; i++) {
             C25[i] = (int) (Math.random() * 21 - 10);
-            if (C25[i] > 0) prodPosC25 *= C25[i];
+            if (C25[i] > 0) {
+                prodPosC25 *= C25[i];
+                hasPos = true;
+            }
         }
-        System.out.println("4) " + prodPosC25);
+        System.out.println("4) " + (hasPos ? prodPosC25 : 0));
 
         int[] D17 = new int[17];
         double sumD17 = 0;
@@ -71,23 +80,34 @@ public class Lab7 {
         int[][] A12x6 = new int[12][6];
         long[] prodCol = new long[6];
         Arrays.fill(prodCol, 1);
+        boolean[] hasNegCol = new boolean[6];
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 6; j++) {
                 A12x6[i][j] = (int) (Math.random() * 21 - 10);
-                if (A12x6[i][j] < 0) prodCol[j] *= A12x6[i][j];
+                if (A12x6[i][j] < 0) {
+                    prodCol[j] *= A12x6[i][j];
+                    hasNegCol[j] = true;
+                }
             }
+        }
+        for (int j = 0; j < 6; j++) {
+            if (!hasNegCol[j]) prodCol[j] = 0;
         }
         System.out.println("8) " + Arrays.toString(prodCol));
 
         int[][] C5 = new int[5][5];
         long prodDiag = 1;
+        boolean hasPosDiag = false;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 C5[i][j] = (int) (Math.random() * 21 - 10);
-                if (i == j && C5[i][j] > 0) prodDiag *= C5[i][j];
+                if (i == j && C5[i][j] > 0) {
+                    prodDiag *= C5[i][j];
+                    hasPosDiag = true;
+                }
             }
         }
-        System.out.println("9) " + prodDiag);
+        System.out.println("9) " + (hasPosDiag ? prodDiag : 0));
 
         int[][] D7 = new int[7][7];
         double sumDiag = 0;
@@ -149,16 +169,26 @@ public class Lab7 {
 
         System.out.println("16) " + maxX());
 
-        String s1 = "Hello";
-        String s2 = "World";
-        String s3 = "Java";
-        String s4 = "Test";
-        String s5 = "Test";
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("s1: ");
+        String s1 = sc.nextLine();
+        System.out.print("s2: ");
+        String s2 = sc.nextLine();
+        System.out.print("s3: ");
+        String s3 = sc.nextLine();
+        System.out.print("s4: ");
+        String s4 = sc.nextLine();
+        System.out.print("s5: ");
+        String s5 = sc.nextLine();
+
         if (s4.equals(s5)) {
             System.out.println("17) " + s1 + s2);
         } else {
             System.out.println("17) " + s1 + s3);
         }
+
+        sc.close();
     }
 
     public static short maxX() {
